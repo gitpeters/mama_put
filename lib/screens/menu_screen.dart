@@ -51,6 +51,8 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     final cart = widget.cart;
+    final itemCount = cart.values.fold(0, (sum, qty) => sum + qty);
+    
     if (activeCategory == 'All') {
       items = menuItems;
     } else {
@@ -151,7 +153,7 @@ class _MenuScreenState extends State<MenuScreen> {
                         children: [
                           SizedBox(
                             child: Text(
-                              '${cart.length} items',
+                              '$itemCount items',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 14,
