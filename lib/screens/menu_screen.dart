@@ -174,13 +174,19 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                       OutlinedButton.icon(
                         iconAlignment: IconAlignment.end,
-                        onPressed: cart.isEmpty ? null :() => widget.placeOrder(lines),
+                        onPressed: cart.isEmpty
+                            ? null
+                            : () => widget.placeOrder(lines),
                         style: OutlinedButton.styleFrom(
                           backgroundColor: Color(0xFFFFF8F0),
                           foregroundColor: Color(0xFF1E7B4F),
+                          disabledBackgroundColor: const Color(0xFFFFF8F0)
+                              .withValues(alpha: 0.5),
+                          disabledForegroundColor: const Color(0xFF1E7B4F)
+                              .withValues(alpha: 0.5),
                           side: BorderSide.none,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(14))
+                            borderRadius: BorderRadius.all(Radius.circular(14)),
                           ),
                           // padding: EdgeInsets.all(15),
                           fixedSize: Size(160, 20),
