@@ -1,4 +1,5 @@
-# mama_put
+# Mama Put
+## Mobile app development journey #2
 
 A new Flutter project.
 
