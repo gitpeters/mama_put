@@ -52,7 +52,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     final cart = widget.cart;
     final itemCount = cart.values.fold(0, (sum, qty) => sum + qty);
-    
+
     if (activeCategory == 'All') {
       items = menuItems;
     } else {
@@ -174,9 +174,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                       OutlinedButton.icon(
                         iconAlignment: IconAlignment.end,
-                        onPressed: () {
-                          widget.placeOrder(lines);
-                        },
+                        onPressed: cart.isEmpty ? null :() => widget.placeOrder(lines),
                         style: OutlinedButton.styleFrom(
                           backgroundColor: Color(0xFFFFF8F0),
                           foregroundColor: Color(0xFF1E7B4F),
