@@ -61,15 +61,12 @@ class _MenuScreenState extends State<MenuScreen> {
           .toList();
     }
 
-    int subtotal = 0;
-    for (final item in menuItems) {
-      subtotal += item.price * (cart[item.id] ?? 0);
-    }
-
     final lines = menuItems
         .where((item) => cart.containsKey(item.id))
         .map((item) => OrderLine(item: item, qty: cart[item.id] ?? 0))
         .toList();
+
+    final subtotal = lines.fold(0, (sum, line) => sum + line.subtotal);
 
     return SizedBox(
       child: Padding(
@@ -115,8 +112,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 450,
+            Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   spacing: 10,
