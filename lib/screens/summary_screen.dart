@@ -21,7 +21,7 @@ class SummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subtotal = orderLines.fold(0, (sum, line) => sum + line.subtotal);
-    final int deliveryFee = subtotal > 5000 ? 0 : 800;
+    final int deliveryFee = subtotal > 15000 ? 0 : 800;
     final int total = subtotal + deliveryFee;
     final String deliveryFeeTxt = deliveryFee > 0
         ? formatNaira(deliveryFee)
@@ -204,7 +204,7 @@ class SummaryScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(14)),
                     ),
                     // padding: EdgeInsets.all(15),
-                    fixedSize: Size(370, 60),
+                    minimumSize: const Size.fromHeight(60)
                   ),
                   child: Text(
                     "Edit order",
@@ -226,7 +226,7 @@ class SummaryScreen extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(14)),
                     ),
                     // padding: EdgeInsets.all(15),
-                    fixedSize: Size(370, 60),
+                    minimumSize: const Size.fromHeight(60)
                   ),
                   child: Text(
                     'Place order • ${formatNaira(total)}',
