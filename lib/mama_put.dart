@@ -138,7 +138,7 @@ class _MamaPutState extends State<MamaPut> {
 
     if (activeScreen == 'summary-screen') {
       screen = SummaryScreen(
-        orderLines: orderLines,
+        orderLines: _buildOrderLines(cart),
         onBack: onBack,
         onEdit: onOrderEdit,
         onOrderSubmit: onOrderSubmit,
