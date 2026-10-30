@@ -27,14 +27,11 @@ class MenuItemCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 1))
-        ]
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 1)),
+        ],
       ),
-      child: Expanded(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 20,
+      child: Row(
+          spacing: 12,
           children: [
             Container(
               height: 50,
@@ -42,8 +39,8 @@ class MenuItemCard extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Color(0xFFFDEBD3),
-                borderRadius: BorderRadius.circular(12)
-                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
               child: Text(item.emoji, style: TextStyle(fontSize: 35)),
             ),
             Expanded(
@@ -51,53 +48,41 @@ class MenuItemCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    // width: 150,
-                    child: Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.name,
-                            style: GoogleFonts.poppins(
-                              color: Color(0xFF2B2B2B),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            item.description,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.poppins(
-                              color: Color(0xFF2B2B2B),
-                              fontSize: 10,
-                            ),
-                          ),
-                          Text(
-                            formatNaira(item.price),
-                            style: GoogleFonts.poppins(
-                              color: Color(0xFFE08A00),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ],
-                      ),
+                  Text(
+                    item.name,
+                    style: GoogleFonts.poppins(
+                      color: Color(0xFF2B2B2B),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Text(
+                    item.description,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins(
+                      color: Color(0xFF2B2B2B),
+                      fontSize: 10,
+                    ),
+                  ),
+                  Text(
+                    formatNaira(item.price),
+                    style: GoogleFonts.poppins(
+                      color: Color(0xFFE08A00),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ],
               ),
             ),
             QtyStepper(
-                    qty: qty,
-                    increaseQty: increaseQty,
-                    decreaseQty: decreaseQty,
-                  ),
+              qty: qty,
+              increaseQty: increaseQty,
+              decreaseQty: decreaseQty,
+            ),
           ],
         ),
-      ),
     );
   }
 }
