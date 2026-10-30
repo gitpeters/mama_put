@@ -1,6 +1,7 @@
 // stateful - activeScreen name + cart + lastOrderNumber
 
 import 'package:flutter/material.dart';
+import 'package:mama_put/data/menu_items.dart';
 import 'package:mama_put/models/menu_item.dart';
 import 'package:mama_put/models/order.dart';
 import 'package:mama_put/models/order_line.dart';
@@ -24,7 +25,6 @@ class _MamaPutState extends State<MamaPut> {
   String activeScreen = 'welcome-screen';
 
   final Map<String, int> cart = {};
-  List<OrderLine> orderLines = [];
   final List<Order> history = [];
 
   int totalOrderAmount = 0;
@@ -50,9 +50,8 @@ class _MamaPutState extends State<MamaPut> {
     });
   }
 
-  void placeOrder(List<OrderLine> lines) {
+  void showSummary(List<OrderLine> lines) {
     setState(() {
-      orderLines = lines;
       activeScreen = 'summary-screen';
     });
   }
@@ -65,14 +64,12 @@ class _MamaPutState extends State<MamaPut> {
 
   void onBack(List<OrderLine> lines) {
     setState(() {
-      _modifyCart(lines);
       activeScreen = 'menu-screen';
     });
   }
 
   void onOrderEdit(List<OrderLine> lines) {
     setState(() {
-      _modifyCart(lines);
       activeScreen = 'menu-screen';
     });
   }
@@ -86,7 +83,7 @@ class _MamaPutState extends State<MamaPut> {
           orderNum: orderNum, 
           orderRef: orderRef, 
           totalOrderAmount: totalOrderAmount, 
-          orderLines: orderLines,
+          orderLines: _buildOrderLines(cart),
           dateTime: DateTime.now()
           ));
       activeScreen = 'success-screen';
@@ -119,11 +116,11 @@ class _MamaPutState extends State<MamaPut> {
     });
   }
 
-  void _modifyCart(List<OrderLine> lines) {
-    cart.clear();
-    for (final line in lines) {
-      cart[line.item.id] = line.qty;
-    }
+  List<OrderLine> _buildOrderLines(Map<String, int> cart) {
+    return menuItems
+    .where((item)=> cart.containsKey(item.id))
+    .map((item) => OrderLine(item: item, qty: cart[item.id]!))
+    .toList();
   }
 
   @override
@@ -135,7 +132,7 @@ class _MamaPutState extends State<MamaPut> {
         cart: cart,
         onAdd: addItem,
         onRemove: removeItem,
-        placeOrder: placeOrder,
+        placeOrder: showSummary,
       );
     }
 
