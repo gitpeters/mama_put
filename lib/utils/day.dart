@@ -3,7 +3,7 @@ String getTimeOfDay() {
   if (hour <= 12) {
     return 'morning';
   }
-  if (hour <= 18) {
+  if (hour <= 17) {
     return 'afternoon';
   }
   return 'evening';
